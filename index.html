@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#101d39">
+<title>CampusVault — Student Document Hub</title>
+<style>
+:root{--navy:#101d39;--blue:#3568e8;--ink:#18233a;--muted:#718096;--line:#e7ebf2;--bg:#f5f7fb;--white:#fff;--green:#138b69;--shadow:0 8px 28px #14213b0c}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+button,input,select{font:inherit}button{cursor:pointer}.shell{display:grid;grid-template-columns:245px minmax(0,1fr);min-height:100vh}
+aside{background:var(--navy);color:#fff;padding:25px 17px;display:flex;flex-direction:column;gap:25px}
+.brand{display:flex;align-items:center;gap:11px;padding:3px 8px}.brandmark{height:38px;width:38px;border-radius:12px;background:#4778f2;display:grid;place-items:center;font-size:21px}.brand b{font-size:18px;letter-spacing:.2px}.brand small{display:block;color:#aab8d3;font-size:11px;letter-spacing:1.5px}
+.navlabel{font-size:10px;color:#8293b4;letter-spacing:1.4px;padding:0 11px;margin-bottom:7px}.nav button{width:100%;text-align:left;border:0;background:transparent;color:#bdc8dc;padding:11px;border-radius:10px;margin:2px 0;display:flex;gap:12px;align-items:center}.nav button.active,.nav button:hover{background:#ffffff16;color:#fff}.nav .ico{width:20px;text-align:center}.aside-note{margin-top:auto;background:#ffffff10;border:1px solid #ffffff18;border-radius:13px;padding:13px;color:#cbd5e6;font-size:12px}
+main{min-width:0;padding:28px clamp(16px,4vw,48px) 50px;max-width:1500px;width:100%;margin:auto}
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:27px}.eyebrow{color:var(--muted);font-size:12px}.topbar h1{font-size:26px;margin:3px 0 0;letter-spacing:-.7px}.profile{display:flex;align-items:center;gap:9px;background:#fff;border:1px solid var(--line);border-radius:30px;padding:6px 12px 6px 6px;font-size:13px}.avatar{height:32px;width:32px;border-radius:50%;background:#e7edff;color:#315bd0;display:grid;place-items:center;font-weight:700}
+.welcome{background:linear-gradient(115deg,#172c55,#3568e8);border-radius:19px;color:white;padding:25px 27px;display:flex;justify-content:space-between;align-items:center;gap:15px;box-shadow:var(--shadow);margin-bottom:19px}.welcome h2{font-size:23px;margin:0 0 5px}.welcome p{margin:0;color:#dce6ff;font-size:13px}.welcome-art{font-size:54px;opacity:.9;padding:0 12px}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px;margin-bottom:22px}.stat,.card{background:var(--white);border:1px solid var(--line);border-radius:15px;box-shadow:var(--shadow)}.stat{padding:17px}.stathead{display:flex;justify-content:space-between;color:var(--muted);font-size:12px}.stat strong{display:block;font-size:25px;margin-top:9px;letter-spacing:-.5px}.staticon{height:32px;width:32px;border-radius:10px;background:#eef2ff;display:grid;place-items:center}
+.sectionhead{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:23px 0 12px}.sectionhead h3{margin:0;font-size:16px}.muted{color:var(--muted);font-size:12px}
+.categories{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:11px}.cat{background:white;border:1px solid var(--line);border-radius:13px;padding:14px;text-align:left;transition:.15s}.cat:hover,.cat.selected{border-color:#6c8ff0;box-shadow:0 0 0 2px #3568e815}.cat .emoji{font-size:22px}.cat b{display:block;font-size:13px;margin:8px 0 2px}.cat small{color:var(--muted);font-size:11px}
+.toolbar{display:flex;gap:9px;flex-wrap:wrap;margin:12px 0}.search{flex:1;min-width:180px;position:relative}.search input{width:100%;padding:11px 13px 11px 37px;border:1px solid var(--line);border-radius:10px;background:#fff;outline:none}.search span{position:absolute;left:13px;top:10px;color:var(--muted)}select,.secondary{border:1px solid var(--line);background:white;border-radius:10px;padding:10px 12px;color:var(--ink)}
+.primary{background:var(--blue);border:0;color:white;padding:11px 16px;border-radius:10px;font-weight:650}.primary:hover{background:#2859d3}.secondary:hover{background:#f1f4fa}
+.upload{border:1.5px dashed #b9c8e6;border-radius:14px;padding:23px;text-align:center;background:#fbfcff}.upload .big{font-size:28px}.upload p{margin:5px 0;color:var(--muted);font-size:12px}.upload label{display:inline-block;margin-top:9px}
+.filelist{overflow:hidden}.file{display:flex;align-items:center;gap:12px;padding:13px 15px;border-bottom:1px solid var(--line)}.file:last-child{border-bottom:0}.fileicon{height:40px;width:40px;display:grid;place-items:center;background:#f0f3fa;border-radius:11px;font-size:19px;flex-shrink:0}.filemeta{min-width:0;flex:1}.filename{font-size:13px;font-weight:650;overflow-wrap:anywhere}.filedetail{font-size:11px;color:var(--muted);margin-top:3px}.fileactions{display:flex;gap:4px}.iconbtn{border:0;background:transparent;color:#5470a7;padding:7px;border-radius:8px}.iconbtn:hover{background:#f0f3fa}.empty{text-align:center;padding:35px 15px;color:var(--muted);font-size:13px}
+.hidden{display:none!important}.notice{margin-top:12px;padding:10px 13px;border-radius:10px;background:#eaf7f1;color:#126b50;font-size:12px;display:none}.notice.show{display:block}
+.modalback{position:fixed;inset:0;background:#0d1834a8;display:grid;place-items:center;padding:15px;z-index:5}.modal{background:#fff;border-radius:17px;padding:21px;width:min(460px,100%);box-shadow:0 20px 70px #0003}.modal h3{margin:0 0 15px}.field{display:grid;gap:6px;margin:12px 0}.field label{font-size:12px;color:#536079}.field input,.field select{width:100%;border:1px solid var(--line);border-radius:9px;padding:10px}.modalactions{display:flex;justify-content:flex-end;gap:8px;margin-top:18px}
+footer{margin-top:25px;color:var(--muted);font-size:11px;text-align:center}
+@media(max-width:850px){.shell{grid-template-columns:1fr}aside{padding:12px 15px;gap:10px}.brand{padding:0}.navlabel,.aside-note{display:none}.nav{display:flex;overflow:auto;gap:4px}.nav button{white-space:nowrap;width:auto;padding:9px 12px}.nav button span:last-child{font-size:12px}main{padding-top:20px}.categories{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:520px){.topbar h1{font-size:22px}.welcome{padding:20px}.welcome-art{font-size:39px}.stats{gap:8px}.stat{padding:12px}.stat strong{font-size:21px}.stathead{font-size:10px}.categories{gap:8px}.cat{padding:11px}.file{gap:8px;padding:11px 9px}.fileactions{gap:0}.fileactions button{padding:6px 4px}.profile .profilename{display:none}}
+</style>
+</head>
+<body>
+<div class="shell">
+<aside>
+ <div class="brand"><div class="brandmark">🎓</div><div><b>CampusVault</b><small>STUDENT DOCUMENT HUB</small></div></div>
+ <div><div class="navlabel">WORKSPACE</div><nav class="nav">
+  <button class="active" data-view="all"><span class="ico">▦</span><span>Overview</span></button>
+  <button data-view="upload"><span class="ico">⇧</span><span>Upload files</span></button>
+  <button data-view="starred"><span class="ico">☆</span><span>Starred</span></button>
+ </nav></div>
+ <div><div class="navlabel">LIBRARY</div><nav class="nav" id="sidecats">
+  <button data-cat="Academic"><span class="ico">📚</span><span>Academic</span></button>
+  <button data-cat="Identification"><span class="ico">🪪</span><span>Identification</span></button>
+  <button data-cat="Scholarships"><span class="ico">🏆</span><span>Scholarships</span></button>
+  <button data-cat="Immigration"><span class="ico">🛂</span><span>Immigration</span></button>
+  <button data-cat="Financial"><span class="ico">💳</span><span>Financial</span></button>
+  <button data-cat="Assignments"><span class="ico">📝</span><span>Assignments</span></button>
+  <button data-cat="Other"><span class="ico">📁</span><span>Other</span></button>
+ </nav></div>
+ <div class="aside-note">🔒 <b>Private by design</b><br><br>This demo saves files in this browser on this device. It does not upload them to a server.</div>
+</aside>
+<main>
+ <header class="topbar"><div><div class="eyebrow">YOUR PERSONAL STUDENT SPACE</div><h1 id="pageTitle">Overview</h1></div><div class="profile"><div class="avatar">S</div><span class="profilename">Student account</span></div></header>
+ <section class="welcome"><div><h2>Your student life, organized.</h2><p>Keep your important documents together and easy to find.</p></div><div class="welcome-art">📂</div></section>
+ <section class="stats">
+  <div class="stat"><div class="stathead"><span>Total documents</span><span class="staticon">📄</span></div><strong id="total">0</strong></div>
+  <div class="stat"><div class="stathead"><span>Storage used</span><span class="staticon">💾</span></div><strong id="used">0 B</strong></div>
+  <div class="stat"><div class="stathead"><span>Starred files</span><span class="staticon">⭐</span></div><strong id="starCount">0</strong></div>
+ </section>
+ <section id="categorySection"><div class="sectionhead"><h3>Browse categories</h3><span class="muted">Choose a collection</span></div><div class="categories" id="categories"></div></section>
+ <section id="uploadSection" class="hidden">
+  <div class="sectionhead"><h3>Upload documents</h3><span class="muted">Up to 25 MB per file</span></div>
+  <div class="card" style="padding:15px">
+   <div class="upload" id="dropzone"><div class="big">☁️</div><b>Drop files here</b><p>or choose files from your phone or computer</p><label class="primary">Choose files<input id="fileInput" type="file" multiple class="hidden"></label></div>
+   <div class="field"><label for="category">Save in category</label><select id="category"><option>Academic</option><option>Identification</option><option>Scholarships</option><option>Immigration</option><option>Financial</option><option>Assignments</option><option>Other</option></select></div>
+   <div class="muted" id="selection">No files selected.</div><button class="primary" id="saveBtn" style="margin-top:12px">Save selected files</button>
+  </div>
+ </section>
+ <section id="librarySection">
+  <div class="sectionhead"><h3 id="listTitle">Recent documents</h3><span class="muted" id="countLabel">0 files</span></div>
+  <div class="toolbar"><div class="search"><span>⌕</span><input id="search" placeholder="Search your documents..."></div><select id="sort"><option value="new">Newest first</option><option value="old">Oldest first</option><option value="az">Name A–Z</option></select><button class="secondary" id="clearFilter">Clear filters</button></div>
+  <div class="card filelist" id="files"><div class="empty">No documents yet. Upload your first file to get started.</div></div>
+ </section>
+ <div class="notice" id="notice" role="status"></div>
+ <footer>CampusVault demo · Files stay in this browser · Clear browser data may delete locally stored files</footer>
+</main>
+</div>
+<div class="modalback hidden" id="previewModal"><div class="modal"><h3 id="previewName">Document</h3><div id="previewBody" class="muted">Preview</div><div class="modalactions"><button class="secondary" id="closePreview">Close</button></div></div></div>
+<script>
+(()=>{
+const $=id=>document.getElementById(id), categories=[['Academic','📚'],['Identification','🪪'],['Scholarships','🏆'],['Immigration','🛂'],['Financial','💳'],['Assignments','📝'],['Other','📁']];
+let db,all=[],selected=[],view='all',catFilter='';
+const fmt=n=>n<1024?n+' B':n<1048576?(n/1024).toFixed(1)+' KB':(n/1048576).toFixed(2)+' MB';
+const safe=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function note(msg){$('notice').textContent=msg;$('notice').classList.add('show');setTimeout(()=>$('notice').classList.remove('show'),4200)}
+const req=indexedDB.open('CampusVaultDB',1);
+req.onupgradeneeded=()=>{let d=req.result;if(!d.objectStoreNames.contains('documents'))d.createObjectStore('documents',{keyPath:'id',autoIncrement:true})};
+req.onsuccess=()=>{db=req.result;load()};
+req.onerror=()=>note('Local storage is unavailable in this browser.');
+function load(){let r=db.transaction('documents').objectStore('documents').getAll();r.onsuccess=()=>{all=r.result;render()}}
+function write(fn){let tx=db.transaction('documents','readwrite');fn(tx.objectStore('documents'));tx.oncomplete=load;tx.onerror=()=>note('Could not save the change. Check device storage.')}
+function render(){
+$('total').textContent=all.length;$('used').textContent=fmt(all.reduce((s,x)=>s+x.size,0));$('starCount').textContent=all.filter(x=>x.star).length;
+$('categories').innerHTML=categories.map(([n,e])=>`<button class="cat ${catFilter===n?'selected':''}" data-category="${n}"><span class="emoji">${e}</span><b>${n}</b><small>${all.filter(x=>x.category===n).length} documents</small></button>`).join('');
+let arr=all.filter(x=>(!catFilter||x.category===catFilter)&&(view!=='starred'||x.star)&&(! $('search').value||x.name.toLowerCase().includes($('search').value.toLowerCase())));
+if($('sort').value==='az')arr.sort((a,b)=>a.name.localeCompare(b.name));else arr.sort((a,b)=>$('sort').value==='old'?a.date-b.date:b.date-a.date);
+$('countLabel').textContent=arr.length+' file'+(arr.length===1?'':'s');
+$('listTitle').textContent=view==='starred'?'Starred documents':catFilter?catFilter+' documents':'Recent documents';
+$('files').innerHTML=arr.length?arr.map(x=>`<div class="file"><div class="fileicon">${x.type.startsWith('image/')?'🖼️':x.type==='application/pdf'?'📕':x.type.includes('word')?'📝':'📄'}</div><div class="filemeta"><div class="filename">${safe(x.name)}</div><div class="filedetail">${safe(x.category)} · ${fmt(x.size)} · ${new Date(x.date).toLocaleDateString()}</div></div><div class="fileactions"><button class="iconbtn" title="${x.star?'Unstar':'Star'}" data-star="${x.id}">${x.star?'⭐':'☆'}</button><button class="iconbtn" title="Preview" data-preview="${x.id}">👁</button><button class="iconbtn" title="Download" data-download="${x.id}">↓</button><button class="iconbtn" title="Delete" data-delete="${x.id}">✕</button></div></div>`).join(''):'<div class="empty">Nothing here yet. Try another search or upload a document.</div>';
+}
+function show(viewName,cat=''){view=viewName;catFilter=cat;$('pageTitle').textContent=viewName==='upload'?'Upload files':viewName==='starred'?'Starred documents':cat||'Overview';$('uploadSection').classList.toggle('hidden',viewName!=='upload');$('categorySection').classList.toggle('hidden',viewName!=='all'||!!cat);$('librarySection').classList.toggle('hidden',viewName==='upload');document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.view===viewName||b.dataset.cat===cat));render();if(viewName==='upload')$('uploadSection').scrollIntoView({behavior:'smooth',block:'start'})}
+document.querySelectorAll('[data-view]').forEach(b=>b.onclick=()=>show(b.dataset.view));
+$('sidecats').onclick=e=>{let b=e.target.closest('[data-cat]');if(b)show('all',b.dataset.cat)};
+$('categories').onclick=e=>{let b=e.target.closest('[data-category]');if(b)show('all',b.dataset.category)};
+$('fileInput').onchange=()=>{selected=[...$('fileInput').files];$('selection').textContent=selected.length?selected.length+' file(s) selected: '+selected.map(f=>f.name).join(', '):'No files selected.'};
+$('dropzone').ondragover=e=>{e.preventDefault();$('dropzone').style.background='#eef3ff'};
+$('dropzone').ondragleave=()=>{$('dropzone').style.background=''};
+$('dropzone').ondrop=e=>{e.preventDefault();$('dropzone').style.background='';selected=[...e.dataTransfer.files];$('selection').textContent=selected.length+' file(s) selected.'};
+$('saveBtn').onclick=()=>{if(!db)return note('Storage is still loading. Try again.');if(!selected.length)return note('Choose at least one file first.');if(selected.some(f=>f.size>25*1024*1024))return note('Each file must be 25 MB or smaller.');let cat=$('category').value;write(s=>selected.forEach(f=>s.add({name:f.name,size:f.size,type:f.type||'application/octet-stream',category:cat,date:Date.now(),blob:f,star:false})));selected=[];$('fileInput').value='';$('selection').textContent='Files saved in this browser.';note('Your documents have been saved on this device.')};
+$('search').oninput=render;$('sort').onchange=render;$('clearFilter').onclick=()=>{catFilter='';view='all';$('search').value='';$('sort').value='new';show('all')};
+$('files').onclick=e=>{let b=e.target.closest('button');if(!b)return;let id=Number(b.dataset.star||b.dataset.preview||b.dataset.download||b.dataset.delete),doc=all.find(x=>x.id===id);if(!doc)return;
+if(b.dataset.star!==undefined)write(s=>s.put({...doc,star:!doc.star}));
+if(b.dataset.delete!==undefined){if(confirm('Permanently delete this locally stored file?'))write(s=>s.delete(id))}
+if(b.dataset.download!==undefined){let u=URL.createObjectURL(doc.blob),a=document.createElement('a');a.href=u;a.download=doc.name;a.click();setTimeout(()=>URL.revokeObjectURL(u),1500)}
+if(b.dataset.preview!==undefined){$('previewName').textContent=doc.name;let body=$('previewBody');body.innerHTML='';if(doc.type.startsWith('image/')){let img=document.createElement('img');img.src=URL.createObjectURL(doc.blob);img.style='max-width:100%;max-height:55vh;border-radius:10px';body.append(img)}else if(doc.type==='application/pdf'){let frame=document.createElement('iframe');frame.src=URL.createObjectURL(doc.blob);frame.style='width:100%;height:55vh;border:0';body.append(frame)}else body.textContent='Preview is not available for this file type. Use Download to open it.';$('previewModal').classList.remove('hidden')}
+};
+$('closePreview').onclick=()=>$('previewModal').classList.add('hidden');$('previewModal').onclick=e=>{if(e.target===$('previewModal'))$('previewModal').classList.add('hidden')};
+})();
+</script>
+</body></html>
